@@ -1,0 +1,29 @@
+Here's an example of searching for a particular register number in an array in C:
+
+```
+#include <stdio.h>
+
+int main() {
+    int n, i, search, flag = 0;
+    printf("Enter the number of register numbers: ");
+    scanf("%d", &n);
+    int reg[n];
+    printf("Enter the register numbers: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &reg[i]);
+    }
+    printf("Enter the register number to search: ");
+    scanf("%d", &search);
+    for (i = 0; i < n; i++) {
+        if (reg[i] == search) {
+            printf("%d is present at location %d.\n", search, i+1);
+            flag = 1;
+            break;
+        }
+    }
+    if (flag == 0) {
+        printf("%d is not present in the array.\n", search);
+    }
+    return 0;
+}
+```
