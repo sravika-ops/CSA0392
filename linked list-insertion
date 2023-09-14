@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of a node in the singly linked list
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to insert a new node at the beginning of the linked list
+struct Node* insertAtBeginning(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    newNode->next = head;
+    return newNode;
+}
+
+// Function to insert a new node at the end of the linked list
+void insertAtEnd(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    struct Node* current = head;
+
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next = newNode;
+}
+
+// Function to insert a new node after a given node
+void insertAfter(struct Node* prevNode, int data) {
+    if (prevNode == NULL) {
+        printf("Previous node cannot be NULL.\n");
+        return;
+    }
+
+    struct Node* newNode = createNode(data);
+    newNode->next = prevNode->next;
+    prevNode->next = newNode;
+}
+
+// Function to print the linked list
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = createNode(1);
+    
+    // Inserting nodes
+    head = insertAtBeginning(head, 0);
+    insertAfter(head, 2);
+    insertAtEnd(head, 3);
+    
+    // Printing the linked list
+    printf("Linked list: ");
+    printList(head);
+
+    return 0;
+}
