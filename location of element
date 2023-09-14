@@ -1,0 +1,29 @@
+Here's an example of finding the location of elements in an array in C:
+
+```
+#include <stdio.h>
+
+int main() {
+    int n, i, search, flag = 0;
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("Enter the elements: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter the element to search: ");
+    scanf("%d", &search);
+    printf("The location(s) of %d in the array are: ", search);
+    for (i = 0; i < n; i++) {
+        if (arr[i] == search) {
+            printf("%d ", i+1);
+            flag = 1;
+        }
+    }
+    if (flag == 0) {
+        printf("Not found");
+    }
+    return 0;
+}
+```
