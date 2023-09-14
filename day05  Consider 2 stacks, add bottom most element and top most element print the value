@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct StackNode {
+    int data;
+    struct StackNode* next;
+};
+
+struct Stack {
+    struct StackNode* top;
+};
+
+// Function to create a new stack node
+struct StackNode* createStackNode(int data) {
+    struct StackNode* newNode = (struct StackNode*)malloc(sizeof(struct StackNode));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to create a new stack
+struct Stack* createStack() {
+    struct Stack* stack = (struct Stack*)malloc(sizeof(struct Stack));
+    stack->top = NULL;
+    return stack;
+}
+
+// Function to push an element onto a stack
+void push(struct Stack* stack, int data) {
+    struct StackNode* newNode = createStackNode(data);
+    newNode->next = stack->top;
+    stack->top = newNode;
+}
+
+// Function to pop an element from a stack
+int pop(struct Stack* stack) {
+    if (stack->top == NULL) {
+        printf("Stack is empty.\n");
+        return -1;
+    }
+    struct StackNode* temp = stack->top;
+    int data = temp->data;
+    stack->top = stack->top->next;
+    free(temp);
+    return data;
+}
+
+// Function to get the bottom-most element of a stack
+int getBottom(struct Stack* stack) {
+    int bottom = -1;
+    if (stack->top == NULL) {
+        printf("Stack is empty.\n");
+    } else {
+        struct StackNode* current = stack->top;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        bottom = current->data;
+    }
+    return bottom;
+}
+
+int main() {
+    struct Stack* stack1 = createStack();
+    struct Stack* stack2 = createStack();
+
+    push(stack1, 1);
+    push(stack1, 2);
+    push(stack1, 3);
+
+    push(stack2, 4);
+    push(stack2, 5);
+    push(stack2, 6);
+
+    int bottom1 = getBottom(stack1);
+    int bottom2 = getBottom(stack2);
+
+    printf("Bottom-most element of stack1: %d\n", bottom1);
+    printf("Bottom-most element of stack2: %d\n", bottom2);
+
+    int top1 = stack1->top->data;
+    int top2 = stack2->top->data;
+
+    printf("Top-most element of stack1: %d\n", top1);
+    printf("Top-most element of stack2: %d\n", top2);
+
+    return 0;
+}
