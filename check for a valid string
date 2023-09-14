@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdbool.h> // Include this header for bool type
+
+bool isValidString(const char *str) {
+    // Check if the string is not empty (i.e., it has at least one character)
+    return (str != NULL && str[0] != '\0');
+}
+
+int main() {
+    const char *input = "Hello, world!"; // Replace with your input string
+
+    if (isValidString(input)) {
+        printf("The string is valid.\n");
+    } else {
+        printf("The string is not valid.\n");
+    }
+
+    return 0;
+}
