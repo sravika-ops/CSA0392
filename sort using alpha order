@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h>
+
+void insertionSort(char arr[][50], int n) {
+    for (int i = 1; i < n; i++) {
+        char key[50];
+        strcpy(key, arr[i]);
+        int j = i - 1;
+
+        while (j >= 0 && strcmp(arr[j], key) > 0) {
+            strcpy(arr[j + 1], arr[j]);
+            j = j - 1;
+        }
+
+        strcpy(arr[j + 1], key);
+    }
+}
+
+void printArray(char arr[][50], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%s\n", arr[i]);
+    }
+}
+
+int main() {
+    char words[][50] = {
+        "apple",
+        "banana",
+        "grape",
+        "orange",
+        "pear"
+    };
+    int n = sizeof(words) / sizeof(words[0]);
+
+    printf("Original array:\n");
+    printArray(words, n);
+
+    insertionSort(words, n);
+
+    printf("Sorted array in alphabetical order:\n");
+    printArray(words, n);
+
+    return 0;
+}
