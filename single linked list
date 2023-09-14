@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure for the linked list
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Create a new node with given data
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        perror("Memory allocation failed");
+        exit(EXIT_FAILURE);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Insert a new node at the beginning of the linked list
+struct Node* insertAtBeginning(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    newNode->next = head;
+    return newNode;
+}
+
+// Insert a new node at the end of the linked list
+struct Node* insertAtEnd(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) {
+        return newNode;
+    }
+    struct Node* current = head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+    return head;
+}
+
+// Display the linked list
+void display(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+// Free the memory of the linked list
+void freeList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    head = insertAtBeginning(head, 30);
+    head = insertAtBeginning(head, 20);
+    head = insertAtBeginning(head, 10);
+
+    head = insertAtEnd(head, 40);
+    head = insertAtEnd(head, 50);
+
+    printf("Linked list: ");
+    display(head);
+
+    freeList(head); // Free the memory
+
+    return 0;
+}
