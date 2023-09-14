@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+    double radius, area;
+    const double pi = 3.14159;  // You can also use the math library constant M_PI
+
+    printf("Enter the radius of the circle: ");
+    scanf("%lf", &radius);
+
+    // Calculate the area
+    area = pi * radius * radius;
+
+    printf("The area of the circle is: %.2lf\n", area);
+
+    return 0;
+}
